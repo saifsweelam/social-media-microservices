@@ -2,15 +2,8 @@ import express from 'express';
 
 const app = express();
 
+app.use((req, res) => {
+    res.send('Hello from auth service!');
+});
 
-app.use((req, res, next) => {
-
-
-
-
-
-
-    res.send("Hello");
-})
-
-app.listen(4000)
+app.listen(4000);

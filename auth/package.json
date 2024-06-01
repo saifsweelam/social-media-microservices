@@ -9,7 +9,7 @@
     "prettier": "prettier --write ./src",
     "start": "node ./build/index.js",
     "start:dev": "nodemon ./src/index.ts",
-    "prepare": "cd .. & husky install auth/.husky"
+    "prepare": "cd .. & husky auth/.husky"
   },
   "author": "Seif El-Din Sweilam",
   "license": "ISC",
@@ -36,8 +36,8 @@
   },
   "lint-staged": {
     "*.ts": [
-      "npm run lint",
-      "npm run prettier"
+      "npm run prettier",
+      "npm run lint"
     ]
   }
 }
