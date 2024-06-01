@@ -1,0 +1,37 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "Authentication Microservice for Social Media App",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "lint": "eslint ./src",
+    "prettier": "prettier --write ./src",
+    "prelint": "npm run prettier",
+    "start": "node ./build/index.js",
+    "start:dev": "nodemon ./src/index.ts"
+  },
+  "author": "Seif El-Din Sweilam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "prettier": "^3.2.5"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.13",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
+    "nodemon": "^3.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.11.0"
+  }
+}
