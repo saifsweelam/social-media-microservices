@@ -1,9 +1,5 @@
-import express from 'express';
+import app from './app';
 
-const app = express();
-
-app.use((req, res) => {
-    res.send('Hello from auth service!');
+app.listen(4000, () => {
+    console.log('Listening on port 4000');
 });
-
-app.listen(4000);
