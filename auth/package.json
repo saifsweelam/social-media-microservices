@@ -45,7 +45,8 @@
   "lint-staged": {
     "*.ts": [
       "npm run prettier",
-      "npm run lint"
+      "npm run lint",
+      "npm run test"
     ]
   },
   "jest": {
