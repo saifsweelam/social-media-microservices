@@ -4,7 +4,7 @@ import { validate } from 'zod-express-validator';
 const signUpValidator = validate(
     {
         body: z.object({
-            email: z.string().email({ message: 'Invalid email' }),
+            email: z.string().email({ message: 'Invalid email' }).toLowerCase(),
             password: z
                 .string()
                 .min(8, {

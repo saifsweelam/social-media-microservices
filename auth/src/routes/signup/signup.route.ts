@@ -14,7 +14,7 @@ signUpRouter.use((req, res, next) => {
 });
 
 signUpRouter.post('/', validator, (req, res) => {
-    res.json({});
+    res.json({ email: req.body.email });
 });
 
 signUpRouter.all('/', (req, res) => {

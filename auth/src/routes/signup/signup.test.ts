@@ -3,7 +3,7 @@ import app from '../../app';
 import { SIGN_UP_ROUTE } from './signup.route';
 
 describe(`POST ${SIGN_UP_ROUTE}`, () => {
-    const validEmail = 'validEmail@mail.com';
+    const validEmail = 'valid_email@mail.com';
     const validPassword = 'validPassw0rd';
 
     describe('Request Method Validation', () => {
@@ -53,6 +53,19 @@ describe(`POST ${SIGN_UP_ROUTE}`, () => {
                 .post(SIGN_UP_ROUTE)
                 .send({ email: 'validEmail@mail.com', password: validPassword })
                 .expect(200);
+        });
+    });
+
+    describe('Email sanitization', () => {
+        it('handles normalization in case of uppercase email', async () => {
+            const response = await supertest(app)
+                .post(SIGN_UP_ROUTE)
+                .send({
+                    email: validEmail.toUpperCase(),
+                    password: validPassword,
+                })
+                .expect(200);
+            expect(response.body.email).toBe(validEmail);
         });
     });
 
