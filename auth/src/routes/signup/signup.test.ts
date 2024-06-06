@@ -23,6 +23,16 @@ describe(`POST ${SIGN_UP_ROUTE}`, () => {
                 .send({ email: validEmail, password: validPassword })
                 .expect(200);
         });
+
+        it('responds with a 200 status code and allow header set to POST if the request method is OPTIONS', async () => {
+            const response = await supertest(app)
+                .options(SIGN_UP_ROUTE)
+                .expect(200);
+            expect(response.headers.allow).toContain('POST');
+            expect(response.headers['access-control-allow-methods']).toContain(
+                'POST',
+            );
+        });
     });
 
     describe('Email validation', () => {
