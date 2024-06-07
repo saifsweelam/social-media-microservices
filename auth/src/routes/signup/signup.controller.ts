@@ -1,10 +1,18 @@
 import { User } from '../../models';
 import { SignUpMiddleware } from './signup.validator';
+import { ValidationError } from '../../errors';
 
 const signUpController: SignUpMiddleware = async (req, res) => {
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
+        throw new ValidationError([
+            {
+                path: ['email'],
+                message: 'Email already exists',
+                code: 'invalid_string',
+                validation: 'base64',
+            },
+        ]);
     }
     const user = new User({
         email: req.body.email,

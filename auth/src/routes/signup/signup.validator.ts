@@ -1,5 +1,6 @@
 import z from 'zod';
 import { validate } from 'zod-express-validator';
+import { ValidationError } from '../../errors';
 
 const signUpValidator = validate(
     {
@@ -28,7 +29,10 @@ const signUpValidator = validate(
     },
     ({ bodyError, paramsError, queryError }, res) => {
         const error = bodyError ?? paramsError ?? queryError;
-        return res.status(400).json({ errors: error?.errors });
+        if (error) {
+            throw new ValidationError(error.errors);
+        }
+        return res;
     },
 );
 
