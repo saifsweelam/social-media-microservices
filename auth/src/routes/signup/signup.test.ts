@@ -1,5 +1,6 @@
 import supertest from 'supertest';
 import app from '../../app';
+import { User } from '../../models';
 import { SIGN_UP_ROUTE } from './signup.route';
 
 describe(`POST ${SIGN_UP_ROUTE}`, () => {
@@ -121,6 +122,29 @@ describe(`POST ${SIGN_UP_ROUTE}`, () => {
                 .post(SIGN_UP_ROUTE)
                 .send({ email: validEmail, password: 'ValidPassw0rd' })
                 .expect(200);
+        });
+    });
+
+    describe('Saving data to the database', () => {
+        it('saves the valid user to the database successfully', async () => {
+            const response = await supertest(app)
+                .post(SIGN_UP_ROUTE)
+                .send({ email: validEmail, password: validPassword })
+                .expect(200);
+            expect(response.body.email).toBe(validEmail);
+            const user = await User.findOne({ email: validEmail });
+            expect(user).not.toBeNull();
+        });
+
+        it('responds with a 400 status code in case of duplicate email', async () => {
+            await supertest(app)
+                .post(SIGN_UP_ROUTE)
+                .send({ email: validEmail, password: validPassword })
+                .expect(200);
+            await supertest(app)
+                .post(SIGN_UP_ROUTE)
+                .send({ email: validEmail, password: validPassword })
+                .expect(400);
         });
     });
 });

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import validator from './signup.validator';
+import controller from './signup.controller';
 
 export const SIGN_UP_ROUTE = '/api/auth/signup';
 
@@ -13,9 +14,7 @@ signUpRouter.use((req, res, next) => {
     return next();
 });
 
-signUpRouter.post('/', validator, (req, res) => {
-    res.json({ email: req.body.email });
-});
+signUpRouter.post('/', validator, controller);
 
 signUpRouter.all('/', (req, res) => {
     res.status(405).json({ message: 'Method Not Allowed' });
